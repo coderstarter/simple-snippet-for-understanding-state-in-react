@@ -1,0 +1,36 @@
+import React from "react";
+import { render } from "react-dom";
+
+class Incrementer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+  }
+  increment() {
+    // this.state.count = this.state.count + 1;
+    // don't do like this as we are directly changing the state
+    // it will not re-render it
+    // use setState instead for it
+    this.setState(
+      {
+        count: this.state.count + 1
+      },
+      () => {
+        console.log("callback function ", this.state.count);
+      }
+    );
+    console.log(this.state.count); // always display less than UI value due to async
+  }
+  render() {
+    return (
+      <>
+        <p>{this.state.count} times clicked </p>
+        <button onClick={() => this.increment()}>click me</button>
+      </>
+    );
+  }
+}
+
+export default Incrementer;
